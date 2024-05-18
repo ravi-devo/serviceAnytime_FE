@@ -1,0 +1,60 @@
+/* General Styles */
+.full-container {
+    height: 98vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.login-container {
+    height: 90%;
+    width: 95%;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    flex-wrap: wrap; /* Ensure flex items wrap */
+}
+
+.left-container, .right-container {
+    padding: 2rem;
+}
+
+.left-container {
+    background-color: #533BBF;
+    color: white;
+}
+
+/* Styles for larger screens (default) */
+@media (min-width: 768px) {
+    .left-container, .right-container {
+        width: 50%;
+    }
+
+    .left-container {
+        border-radius: 1rem 0 0 1rem;
+    }
+
+    .right-container {
+        border-radius: 0 1rem 1rem 0;
+        background-color: lightgray;
+    }
+}
+
+/* Styles for smaller screens (mobile) */
+@media (max-width: 767px) {
+    .left-container, .right-container {
+        width: 100%;
+    }
+
+    .left-container {
+        border-radius: 1rem 1rem 0 0; /* Round top corners */
+    }
+
+    .right-container {
+        border-radius: 0 0 1rem 1rem; /* Round bottom corners */
+        background-color: lightgray;
+    }
+}
