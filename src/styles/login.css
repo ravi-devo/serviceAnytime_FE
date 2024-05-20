@@ -22,7 +22,7 @@
     padding: 2rem;
 }
 
-.left-container {
+.right-container {
     background-color: #533BBF;
     color: white;
 }
@@ -35,11 +35,15 @@
 
     .left-container {
         border-radius: 1rem 0 0 1rem;
+        background-color: lightgray;
     }
 
     .right-container {
         border-radius: 0 1rem 1rem 0;
-        background-color: lightgray;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -51,10 +55,10 @@
 
     .left-container {
         border-radius: 1rem 1rem 0 0; /* Round top corners */
+        background-color: lightgray;
     }
 
     .right-container {
         border-radius: 0 0 1rem 1rem; /* Round bottom corners */
-        background-color: lightgray;
     }
 }

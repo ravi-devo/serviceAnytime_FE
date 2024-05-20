@@ -1,0 +1,64 @@
+/* General Styles */
+.fullContainer {
+    height: 98vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.registerContainer {
+    height: 90%;
+    width: 95%;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    flex-wrap: wrap; /* Ensure flex items wrap */
+}
+
+.leftContainer, .rightContainer {
+    padding: 2rem;
+}
+
+.leftContainer {
+    background-color: #533BBF;
+    color: white;
+}
+
+/* Styles for larger screens (default) */
+@media (min-width: 768px) {
+    .leftContainer, .rightContainer {
+        width: 50%;
+    }
+
+    .leftContainer {
+        border-radius: 1rem 0 0 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rightContainer {
+        border-radius: 0 1rem 1rem 0;
+        background-color: lightgray;
+    }
+}
+
+/* Styles for smaller screens (mobile) */
+@media (max-width: 767px) {
+    .leftContainer, .rightContainer {
+        width: 100%;
+    }
+
+    .leftContainer {
+        border-radius: 1rem 1rem 0 0; /* Round top corners */
+    }
+
+    .rightContainer {
+        border-radius: 0 0 1rem 1rem; /* Round bottom corners */
+        background-color: lightgray;
+    }
+}

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/login.css';
 import { useLoginMutation } from '../slices/userSlice/userApiSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCredential } from '../slices/userSlice/authReducer';
 import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 
@@ -12,10 +12,15 @@ const LoginScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const {userInfo} = useSelector((state) => state.auth);
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword(!showPassword);
-    };    
+    };
+
+    const handleClick = () => {
+        navigate('/register');
+    };
 
     const [login] = useLoginMutation();
     const dispatch = useDispatch();
@@ -23,26 +28,33 @@ const LoginScreen = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const res = await login({ username, password }).unwrap();
-            if (res.message === 'User authenticated successfully') {
-                dispatch(setCredential({ ...res }));
-                navigate('/home');
-                console.log('User authenticated successfully')
+        if (username.trim() !== '' && password.trim() !== '') {
+            try {
+                const res = await login({ username, password }).unwrap();
+                if (res.message === 'User authenticated successfully') {
+                    dispatch(setCredential({ ...res }));
+                    navigate('/home');
+                    console.log('User authenticated successfully')
+                }
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
             }
-        } catch (err) {
-            toast.error(err?.data?.message || err.error);
+        }else{
+            toast.error('Username or Password cannot be empty')
         }
     }
+
+    useEffect(() => {
+        if(userInfo){
+            navigate('/home')
+        }
+    },[navigate, userInfo]);
+
     return (<>
         <div className='full-container'>
             <div className="login-container">
                 <div className='left-container'>
-                    <h2>Welcome Back!</h2>
-                    <h6>Login and get your issue addressed at earliest</h6>
-                </div>
-                <div className='right-container'>
-                    <h4>Login Here</h4>
+                    <h4>Welcome back, Login</h4>
                     <br />
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className='my-2' controlId='formUsername'>
@@ -63,9 +75,13 @@ const LoginScreen = () => {
                                 </InputGroup.Text>
                             </InputGroup>
                         </Form.Group>
-                        <p className='my-2'>Do not have an account yet? <Link to='/register'>Register Now</Link> </p>
                         <Button className='my-2' type='submit'>Login</Button>
                     </Form>
+                </div>
+                <div className='right-container'>
+                    <h4>Do not have an account yet?</h4>
+                    <p>Join with us and get your queries addressed quickly</p>
+                    <Button onClick={handleClick}>Sign Up</Button>
                 </div>
             </div>
         </div>
