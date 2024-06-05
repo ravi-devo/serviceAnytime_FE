@@ -70,7 +70,7 @@ const RegisterScreen = () => {
                         <Button onClick={handleClick}>Login</Button>
                     </div>
                     <div className="rightContainer">
-                        <h4>Register</h4>
+                        <h4>Welcome to Service Anytime, Join us</h4>
                         <br />
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="my-2" id="formName">
