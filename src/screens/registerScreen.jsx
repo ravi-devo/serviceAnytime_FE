@@ -7,6 +7,7 @@ import '../styles/register.css';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { setCredential } from "../slices/userSlice/authReducer";
+import Loader from "../components/loader";
 
 const RegisterScreen = () => {
 
@@ -18,7 +19,7 @@ const RegisterScreen = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isAdmin, setAdmin] = useState(true);
 
-    const [register] = useRegisterMutation();
+    const [register, {isLoading}] = useRegisterMutation();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -132,6 +133,7 @@ const RegisterScreen = () => {
                             </div>
                             <Button className="my-2" type="submit">Register</Button>
                         </Form>
+                        {isLoading && <Loader />}
                     </div>
                 </div>
             </div>

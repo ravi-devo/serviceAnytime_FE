@@ -6,6 +6,7 @@ import { createTicket } from "../slices/ticketSlice/ticketReducer";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/navBar";
 import { Form, Button } from 'react-bootstrap';
+import Loader from "../components/loader";
 
 const NewTicket = () => {
 
@@ -13,7 +14,7 @@ const NewTicket = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [assignmentGroup, setAssignmentGroup] = useState('');
-    const [CreateTicket] = useCreateTicketMutation();
+    const [CreateTicket, {isLoading}] = useCreateTicketMutation();
     const token = userInfo.token;
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -76,6 +77,7 @@ const NewTicket = () => {
                         </Form.Group>
                     </Form>
                 </div>
+                {isLoading && <Loader />}
             </div>
         </>
     )

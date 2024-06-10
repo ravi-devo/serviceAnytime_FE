@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/navBar';
 import { Button } from 'react-bootstrap';
 import { Table } from 'react-bootstrap';
+import Loader from '../components/loader';
 
 const Home = () => {
 
@@ -13,7 +14,7 @@ const Home = () => {
     const { ticketItems } = useSelector((state) => state.ticket);
     const dispatch = useDispatch();
     const [GetMyTickets] = useGetUserTicketsMutation();
-    const [GetAllTickets] = useGetAllticketsMutation();
+    const [GetAllTickets, {isLoading}] = useGetAllticketsMutation();
     const token = userInfo.token;
     const navigate = useNavigate();
 
@@ -70,6 +71,7 @@ const Home = () => {
                             })}
                         </tbody>
                     </Table>
+                    {isLoading && <Loader />}
                 </div> : <p>You do not have any tickets created, please create if you have any issues</p>}
             </div>
         </div>

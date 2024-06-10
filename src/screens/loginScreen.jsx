@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import Loader from '../components/loader';
 
 const LoginScreen = () => {
     const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const LoginScreen = () => {
         navigate('/register');
     };
 
-    const [login] = useLoginMutation();
+    const [login, {isLoading}] = useLoginMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -77,6 +78,7 @@ const LoginScreen = () => {
                         </Form.Group>
                         <Button className='my-2' type='submit'>Login</Button>
                     </Form>
+                    {isLoading && <Loader />}
                 </div>
                 <div className='right-container'>
                     <h4>Do not have an account yet?</h4>

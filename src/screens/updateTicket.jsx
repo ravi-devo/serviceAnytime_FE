@@ -6,6 +6,7 @@ import { updateTicket } from "../slices/ticketSlice/ticketReducer";
 import { toast } from "react-toastify";
 import Header from "../components/navBar";
 import { Button, Form, Row, Col } from 'react-bootstrap';
+import Loader from "../components/loader";
 
 const UpdateTicket = () => {
 
@@ -26,7 +27,7 @@ const UpdateTicket = () => {
     const assignmentGroupFiltered = assignmentGroupOptions.filter(e => e != assignmentGroup);
     const [assignedTo, setAssignedTo] = useState(data.assignee);
     const token = userInfo.token;
-    const [UpdateTicketAPI] = useUpdateTicketMutation();
+    const [UpdateTicketAPI, {isLoading}] = useUpdateTicketMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -134,6 +135,7 @@ const UpdateTicket = () => {
                         </Form.Group>
                     </Form>
                 </div>
+                {isLoading && <Loader />}
             </div>
         </>
     )
